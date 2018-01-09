@@ -15,6 +15,7 @@
 		79A158002003B00B006A8A1F /* FavoriteRestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A157FF2003B00B006A8A1F /* FavoriteRestaurantsUITests.swift */; };
 		79A158122003B0B5006A8A1F /* RestaurantDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A158112003B0B5006A8A1F /* RestaurantDataProvider.swift */; };
 		79A158142003B228006A8A1F /* RestaurantDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A158132003B228006A8A1F /* RestaurantDataManager.swift */; };
+		79A158172004DE15006A8A1F /* sample iOS.json in Resources */ = {isa = PBXBuildFile; fileRef = 79A158162004DE15006A8A1F /* sample iOS.json */; };
 		9AF9715AD98946FE51919773 /* Pods_FavoriteRestaurants.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7937FE77CA41E76C4A49412A /* Pods_FavoriteRestaurants.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		79A158012003B00B006A8A1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		79A158112003B0B5006A8A1F /* RestaurantDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDataProvider.swift; sourceTree = "<group>"; };
 		79A158132003B228006A8A1F /* RestaurantDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDataManager.swift; sourceTree = "<group>"; };
+		79A158162004DE15006A8A1F /* sample iOS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "sample iOS.json"; sourceTree = "<group>"; };
 		874B05B096E106E87C051792 /* Pods-FavoriteRestaurants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoriteRestaurants.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FavoriteRestaurants/Pods-FavoriteRestaurants.debug.xcconfig"; sourceTree = "<group>"; };
 		C1ECE6A7729FDA8DA43A3826 /* Pods-FavoriteRestaurants.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FavoriteRestaurants.release.xcconfig"; path = "Pods/Target Support Files/Pods-FavoriteRestaurants/Pods-FavoriteRestaurants.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +108,7 @@
 		79A157DE2003B00B006A8A1F /* FavoriteRestaurants */ = {
 			isa = PBXGroup;
 			children = (
+				79A158152004DE02006A8A1F /* Resources */,
 				79A158102003B08E006A8A1F /* Data Provider */,
 				79A1580E2003B062006A8A1F /* View */,
 				79A1580D2003B01C006A8A1F /* Supporting Files */,
@@ -165,6 +168,14 @@
 				79A158132003B228006A8A1F /* RestaurantDataManager.swift */,
 			);
 			path = "Data Provider";
+			sourceTree = "<group>";
+		};
+		79A158152004DE02006A8A1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				79A158162004DE15006A8A1F /* sample iOS.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A0442B198C27EF6A38BDD0A5 /* Frameworks */ = {
@@ -294,6 +305,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79A158172004DE15006A8A1F /* sample iOS.json in Resources */,
 				79A157EA2003B00B006A8A1F /* LaunchScreen.storyboard in Resources */,
 				79A157E72003B00B006A8A1F /* Assets.xcassets in Resources */,
 				79A157E52003B00B006A8A1F /* Main.storyboard in Resources */,
