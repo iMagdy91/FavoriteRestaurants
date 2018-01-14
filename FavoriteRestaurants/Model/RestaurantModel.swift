@@ -29,7 +29,7 @@ class Restaurant: BaseModel {
     private(set) var name                 : String?
     private(set) var sortingValues        : SortingValues?
     private(set) var status               : String?
-    private(set) var isFavorite           : Bool?
+    var isFavorite                        : Bool = false
     
     /**
      Mapping from API

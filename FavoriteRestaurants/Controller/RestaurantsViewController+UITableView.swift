@@ -10,6 +10,7 @@ import UIKit
 
 extension RestaurantsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    
     //MARK: - UITableViewDataSource Methods
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
@@ -38,6 +39,14 @@ extension RestaurantsViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         
+        //TODO: set array pointer
+        var currentArray = showFilteredArray ? filteredArray : restaurantsArray
+        
+        let restaurant =  currentArray?[indexPath.row]
+        
+        restaurant?.isFavorite = !(restaurant?.isFavorite ?? false)
+        currentArray = restaurantStore.sortArray(restaurants: currentArray , sortingOption: .distance)
+        tableView.reloadData()
     }
     
 }

@@ -5,6 +5,7 @@ target "FavoriteRestaurants" do
     
 pod 'ObjectMapper'
 pod 'MBProgressHUD'
+pod 'SwiftKVC'
 
 end
 

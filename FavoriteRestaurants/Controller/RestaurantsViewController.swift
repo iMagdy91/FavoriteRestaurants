@@ -40,8 +40,7 @@ class RestaurantsViewController: BaseViewController {
     var showFilteredArray           : Bool = false {
         didSet {
             if showFilteredArray {
-                //TODO: filtered array
-                //filteredArray =
+                filteredArray = restaurantStore.filterRestaurantsArray(restaurants: restaurantsArray, restaurantName: searchText, sortingOption: .distance)
             }
             else {
                 filteredArray = nil
