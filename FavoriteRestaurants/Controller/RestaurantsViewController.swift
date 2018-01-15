@@ -13,6 +13,7 @@ class RestaurantsViewController: BaseViewController {
 
     //MARK: - Outlets
     @IBOutlet weak var tableView    : UITableView!
+    @IBOutlet var sortingButtons: [UIButton]!
     
     //MARK: - Properties
     var searchController            : UISearchController = UISearchController(searchResultsController: nil)
@@ -40,9 +41,10 @@ class RestaurantsViewController: BaseViewController {
     var showFilteredArray           : Bool = false {
         didSet {
             if showFilteredArray {
-                filteredArray = restaurantStore.filterRestaurantsArray(restaurants: restaurantsArray, restaurantName: searchText, sortingOption: .distance)
+                filteredArray = restaurantStore.filterRestaurantsArray(restaurants: restaurantsArray, restaurantName: searchText)
             }
             else {
+                restaurantStore.sortArray(restaurants: &restaurantsArray)
                 filteredArray = nil
             }
         }
@@ -75,6 +77,16 @@ class RestaurantsViewController: BaseViewController {
         }
         
     }
+    
+    @IBAction func sortingButtonPressed(_ sender: UIButton) {
+        for button in sortingButtons {
+            button.isSelected = false
+        }
+        sender.isSelected = true
+        //TODO: continue
+        
+    }
+    
 
 
 }

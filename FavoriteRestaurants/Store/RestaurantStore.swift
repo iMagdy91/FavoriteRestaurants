@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftKVC
 
 enum SortingOptions {
     case bestMatch
@@ -22,6 +21,10 @@ enum SortingOptions {
 
 class RestaurantStore: BaseStore {
     
+    /**
+     Sort the restaurants by this option.
+     */
+    var sortingOption: SortingOptions = .bestMatch
     
     //MARK: - Methods
     /**
@@ -35,8 +38,8 @@ class RestaurantStore: BaseStore {
         let _ = RestaurantDataManager({[weak self] (model) in
             guard let strongSelf = self else { return }
             if let restaurantModel = model as? RestaurantModel {
-                
-                success(strongSelf.sortArray(restaurants: restaurantModel.restaurants, sortingOption: .distance))
+                strongSelf.sortArray(restaurants: &restaurantModel.restaurants)
+                success(restaurantModel.restaurants)
             }
         }, restaurantFailureClosure: failure)
     }
@@ -45,59 +48,45 @@ class RestaurantStore: BaseStore {
      Filter the restaurants by the required options.
      - Parameter restaurants: Restaurants array to be filtered.
      - Parameter restaurantName: filter the array with this string.
-     - Parameter sortingOption: Sort the filtered array by one of the avaiable options.
      - Returns : The filtered array.
      */
     func filterRestaurantsArray(restaurants: [Restaurant]?,
-                                restaurantName: String?,
-                                sortingOption: SortingOptions) -> [Restaurant]? {
-        let filteredArray = restaurants?.filter{ $0.name == restaurantName }
-        return sortArray(restaurants: filteredArray, sortingOption: .distance)
+                                restaurantName: String?) -> [Restaurant]? {
+        var filteredArray = restaurants?.filter{ ($0.name ?? "" ).containsIgnoringCase(find: restaurantName)  }
+        sortArray(restaurants: &filteredArray)
+        return filteredArray
     }
     
     
     /**
      Sort the restaurants array.
      - Parameter restaurants: Restaurants array to be sorted.
-     - Parameter sortingOption: Sort the filtered array by one of the avaiable options.
-     - Returns : The sorted array.
      */
-    func sortArray(restaurants: [Restaurant]?,
-                   sortingOption: SortingOptions) -> [Restaurant]? {
-        var sortingOptionStr   :String?
-        switch sortingOption {
-        case .averageProductPrice:
-            sortingOptionStr = "averageProductPrice"
-        case .bestMatch:
-            sortingOptionStr = "bestMatch"
-        case .deliveryCost:
-            sortingOptionStr = "deliveryCosts"
-        case .distance:
-            sortingOptionStr = "distance"
-        case .minCost:
-            sortingOptionStr = "minCost"
-        case .newest:
-            sortingOptionStr = "newest"
-        case .popularity:
-            sortingOptionStr = "popularity"
-        case .ratingAverage:
-            sortingOptionStr = "ratingAverage"
-        }
+    func sortArray(restaurants: inout [Restaurant]?) {
         
-        return restaurants?.sorted(by: { (s1, s2) -> Bool in
-            if s1.isFavorite && !s2.isFavorite {
-                return true
-            }
-            if !s1.isFavorite && s2.isFavorite {
-                return false
-            }
+        restaurants = restaurants?.sorted(by: { (s1, s2) -> Bool in
             if s1.isFavorite == s2.isFavorite {
-                if s1.status == "open" && s2.status == "open" {
-                    return s1.sortingValues!.distance! < s2.sortingValues!.distance!
+                if s1.status == s2.status  {
+                    switch sortingOption {
+                    case .bestMatch:
+                        return s1.sortingValues.bestMatch < s2.sortingValues.bestMatch
+                    case .newest:
+                        return s1.sortingValues.newest < s2.sortingValues.newest
+                    case .ratingAverage:
+                        return s1.sortingValues.ratingAverage < s2.sortingValues.ratingAverage
+                    case .distance:
+                        return s1.sortingValues.distance < s2.sortingValues.distance
+                    case .popularity:
+                        return s1.sortingValues.popularity < s2.sortingValues.popularity
+                    case .averageProductPrice:
+                        return s1.sortingValues.averageProductPrice < s2.sortingValues.averageProductPrice
+                    default:
+                        return s1.sortingValues.bestMatch < s2.sortingValues.bestMatch
+                    }
                 }
                 return s1.status == "open"
             }
-            return false
+            return s1.isFavorite && !s2.isFavorite
         })
     }
 }

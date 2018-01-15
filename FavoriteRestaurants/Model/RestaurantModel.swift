@@ -13,7 +13,7 @@ import ObjectMapper
 class RestaurantModel: BaseModel {
     
     // MARK: - Properties
-    private(set) var restaurants          : [Restaurant]?
+    var restaurants                       : [Restaurant]?
     
     /**
      Mapping from API
@@ -27,7 +27,7 @@ class Restaurant: BaseModel {
     
     // MARK: - Properties
     private(set) var name                 : String?
-    private(set) var sortingValues        : SortingValues?
+    private(set) var sortingValues        : SortingValues!
     private(set) var status               : String?
     var isFavorite                        : Bool = false
     
@@ -44,14 +44,14 @@ class Restaurant: BaseModel {
 class SortingValues: BaseModel {
     
     // MARK: - Properties
-    private(set) var bestMatch              : Int?
-    private(set) var newest                 : Int?
-    private(set) var ratingAverage          : Double?
-    private(set) var distance               : Int?
-    private(set) var popularity             : Int?
-    private(set) var averageProductPrice    : Int?
-    private(set) var deliveryCosts          : Int?
-    private(set) var minCost                : Int?
+    private(set) var bestMatch              : Int!
+    private(set) var newest                 : Int!
+    private(set) var ratingAverage          : Double!
+    private(set) var distance               : Int!
+    private(set) var popularity             : Int!
+    private(set) var averageProductPrice    : Int!
+    private(set) var deliveryCosts          : Int!
+    private(set) var minCost                : Int!
     
     /**
      Mapping from API
