@@ -21,15 +21,31 @@ class FavoriteRestaurantsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    //A single test case to prove the concept!
+    
+    func testDataManager() {
+        
+        let expectations: XCTestExpectation = expectation(description: "Testing DataManager")
+        let _  : RestaurantDataManager  = RestaurantDataManager({(model) in
+            XCTAssertNotNil(model)
+            expectations.fulfill()
+        }) { (error) in
+            XCTFail("##ERROR happened: \(error)")
+            expectations.fulfill()
+        }
+        
+        waitForExpectations(timeout: 10.0) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsTimeout error: \(error)")
+            }
+        }
+        
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        self.measure {[weak self] in
+            self?.testDataManager()
         }
     }
     

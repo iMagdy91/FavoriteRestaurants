@@ -35,10 +35,9 @@ extension RestaurantsViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     //MARK: - UITableViewDelegate Methods
-
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        
+        //TODO: Favorite status is not being persisted, as this is just a POC
         var restaurant: Restaurant?
         if showFilteredArray {
             restaurant =  filteredArray?[indexPath.row]

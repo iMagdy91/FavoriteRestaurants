@@ -83,10 +83,30 @@ class RestaurantsViewController: BaseViewController {
             button.isSelected = false
         }
         sender.isSelected = true
-        //TODO: continue
-        
+        if let buttonTitle = sender.currentTitle {
+            switch buttonTitle {
+            case SortingButtonTitle.bestMatch:
+                restaurantStore.sortingOption = .bestMatch
+            case SortingButtonTitle.distance:
+                restaurantStore.sortingOption = .distance
+            case SortingButtonTitle.newest:
+                restaurantStore.sortingOption = .newest
+            case SortingButtonTitle.popularity:
+                restaurantStore.sortingOption = .popularity
+            case SortingButtonTitle.price:
+                restaurantStore.sortingOption = .averageProductPrice
+            case SortingButtonTitle.rating:
+                restaurantStore.sortingOption = .ratingAverage
+            default:
+                break
+            }
+            if showFilteredArray {
+                restaurantStore.sortArray(restaurants: &filteredArray)
+            }
+            else {
+                restaurantStore.sortArray(restaurants: &restaurantsArray)
+            }
+            tableView.reloadData()
+        }
     }
-    
-
-
 }
